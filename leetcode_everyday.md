@@ -89,12 +89,11 @@ class Solution:
         
         # fast를 n칸 보낸다.
         for _ in range(n):
+          	# 예외처리, n이 length 보다 큰 경우
+          	if fast is None:
+              	return head.next
             fast = fast.next
-        
-        # 예외체리, n이 lengh 이상인 경우
-        if fast == None:
-            return head.next
-        
+                
         # fast와 slow를 마지막 노드까지 보낸다. "while fast:" 가 아님에 주의
         while fast.next:
             fast = fast.next
