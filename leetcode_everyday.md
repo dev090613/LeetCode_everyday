@@ -105,7 +105,7 @@ class Solution:
 # Follow up: Could you do this in one pass?
 ~~~
 
-### Reverse Linked List(206)
+### Reverse Linked List(206) 4/18
 
 ~~~python
 # Definition for singly-linked list.
@@ -123,5 +123,33 @@ class Solution:
             before = temp
             temp = after
         return before
+      
+# Follow up: A linked list can be reversed either iteratively or recursively. Could you implement both?
+~~~
+
+~~~python
+# recursive solution
+
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        # break point
+        # if (head == None) or (head.next == None):
+        if (not head) or (not head.next):
+            return head
+        
+        reversed_sublist = self.reverseList(head.next)
+        head.next.next = head
+        head.next = None
+        return reversed_sublist
+    
+# time complexity: O(n)
+# space complexity: O(n)
+# Runtime: 30 ms, faster than 94.46% of Python3 online submissions for Reverse Linked List.
+# Memory Usage: 20.4 MB, less than 5.97% of Python3 online submissions for Reverse Linked List.
+~~~
+
+### Reverse Linked List II(92)
+
+~~~python
 ~~~
 
