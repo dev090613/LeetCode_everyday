@@ -148,8 +148,134 @@ class Solution:
 # Memory Usage: 20.4 MB, less than 5.97% of Python3 online submissions for Reverse Linked List.
 ~~~
 
-### Reverse Linked List II(92)
+### Reverse Linked List II(92) 4/19
 
 ~~~python
+~~~
+
+### Valid Palindrome(125) 4/20
+
+~~~python
+# 방법1: list
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        s_list = [char.lower() for char in s if char.isalnum()]
+        while len(s_list) > 1:
+            if s_list.pop(0) != s_list.pop():
+                return False
+        return True
+~~~
+
+~~~python
+# 방법2: 데크 자료형
+~~~
+
+~~~python
+# 방법3: slicing
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        s = s.lower()
+        s = re.sub('[^a-z0-9]', '', s) # important🌹
+        
+        return s == s[::-1]
+~~~
+
+### Reverse String(344) 4/21
+
+~~~python
+# 방법1: two pointer swap
+# You must do this by modifying the input array in-place with O(1) extra memory.
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        # left와 right는 index의 역할을 할 것
+        left, right = 0, len(s)-1
+        while left < right:
+            s[left], s[right] = s[right], s[left]
+            left += 1
+            right -= 1
+        return s
+~~~
+
+~~~python
+# 방법2: pythonic
+# You must do this by modifying the input array in-place with O(1) extra memory.
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        return s.reverse()
+      
+# When anything other than list is used in place of list, then it returns an AttributeError.
+~~~
+
+~~~python
+# 방법3: slicing
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        # slicing은 문자열과 list를 처리하기 아주 좋은 방법이지만(성능도 좋다)
+        # return [s::-1] 은 오답으로 처리된다. 그 이유는
+        # 공간복잡도를 O(1)으로 제한하기 때문이다.
+        # 이것은 s[:] = s[::-1] 으로 제출하면 해결이 된다.
+        # The [:] makes a shallow copy of the array, hence allowing you to modify your copy without damaging the original.
+        s[:] = s[::-1]
+        return s[:]
+~~~
+
+
+
+### Reorder Data in Log Files(937) 4/22
+
+~~~python
+# lambda & '+ operator'
+# 문자로 구성된 로그가 숫자 로그보다 이전에 오며, 숫자 로그는 입력 순서대로 둔다
+
+#####################################
+## .split(), default: space
+# string = "one,two,three"
+# words = string.split(',')
+# print(words) # ['one', 'two', 'three']
+
+# # .isdigit(), checking for digit
+# string = '15460'
+# print(string.isdigit()) # True
+
+# string = '154ayush60'
+# print(string.isdigit()) # False
+#####################################
+
+
+# Input: logs = ["a1 9 2 3 1","g1 act car","zo4 4 7","ab1 off key dog","a8 act zoo"]
+# Output: ["g1 act car","a8 act zoo","ab1 off key dog","a1 9 2 3 1","zo4 4 7"]
+
+class Solution:
+    def reorderLogFiles(self, logs: list[str]) -> list[str]:
+        # 식별자를 이용해서 문자로그와 숫자로그를 구분한다
+        digits_list = []
+        letters_list = []
+        for log in logs: 
+            if log.split()[1].isdigit():
+                digits_list.append(log)
+            else:
+                letters_list.append(log)
+        # return letters_list
+        letters_list.sort(key=lambda x: x.split()[1:], x.split()[0])
+        return letters_list + digits_list
+
+        
+# key 인자에 람다 함수를 전달합니다. 
+# 이 람다 함수는 두 개의 키를 가지고 정렬합니다. 
+# 첫 번째 키는 로그의 두 번째 단어 이후의 모든 단어를 튜플로 반환합니다. 
+# 이를 통해 로그의 두 번째 단어 이후에 오는 모든 단어들을 우선순위에 따라 정렬할 수 있습니다. 
+# 두 번째 키는 로그의 첫 번째 단어를 반환합니다. 
+# 이를 통해 두 로그의 첫 번째 단어가 같은 경우, 그 뒤의 단어들을 알파벳 순서에 따라 정렬할 수 있습니다.
+
+# sort, sorted
+# https://blog.naver.com/PostView.naver?blogId=wideeyed&logNo=221745416992
+
+# lambda
+#  letters.sort()에서 key 인자로 사용되는 람다 함수는 로그 파일의 문자 로그를 정렬하는 데 사용됩니다. 이 람다 함수는 sort() 함수가 로그 파일 리스트를 정렬할 때 어떤 기준을 사용해야 하는지를 알려줍니다.
+
+# 람다 함수는 두 개의 키를 가지고 로그 파일 리스트를 정렬합니다. 첫 번째 키는 로그 파일에서 두 번째 단어 이후의 모든 단어를 튜플로 반환합니다. 이 튜플은 이후의 모든 단어들을 우선순위에 따라 정렬하기 위한 것입니다. 그러므로 이 튜플은 로그 파일에서 두 번째 단어 이후의 모든 단어들을 포함합니다. 예를 들어, "abc def ghi"와 "abc def jkl" 두 문자열이 있다면, 두 번째 단어 이후의 모든 단어들을 비교하면 "ghi"와 "jkl"을 비교하게 됩니다.
+# 두 번째 키는 로그 파일의 첫 번째 단어를 반환합니다. 이는 첫 번째 단어가 같은 경우, 두 번째 단어 이후의 단어들을 알파벳 순서에 따라 정렬하게 합니다.
+# 따라서 람다 함수는 첫 번째 키는 "def ghi"나 "def jkl"과 같은 튜플을 반환하고, 두 번째 키는 "abc"와 같은 문자열을 반환합니다. 이를 sort() 함수의 key 인자로 전달하면, 이 함수는 로그 파일 리스트를 첫 번째 키로 먼저 정렬하고, 그 다음에 두 번째 키로 정렬합니다.
+# 결국 이 함수는 문자로 이루어진 로그는 두 번째 단어 이후의 단어들과 첫 번째 단어를 기준으로 정렬하고, 숫자로 이루어진 로그는 그대로 유지하는 기능을 수행합니다.
 ~~~
 
