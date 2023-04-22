@@ -148,12 +148,12 @@ class Solution:
 # Memory Usage: 20.4 MB, less than 5.97% of Python3 online submissions for Reverse Linked List.
 ~~~
 
-### Reverse Linked List II(92) 4/19
+### Reverse Linked List II(92) 4/
 
 ~~~python
 ~~~
 
-### Valid Palindrome(125) 4/20
+### Valid Palindrome(125) 4/21
 
 ~~~python
 # 방법1: list
@@ -219,9 +219,7 @@ class Solution:
         return s[:]
 ~~~
 
-
-
-### Reorder Data in Log Files(937) 4/22
+### Reorder Data in Log Files(937) 4/21
 
 ~~~python
 # lambda & '+ operator'
@@ -278,5 +276,99 @@ class Solution:
 # 두 번째 키는 로그 파일의 첫 번째 단어를 반환합니다. 이는 첫 번째 단어가 같은 경우, 두 번째 단어 이후의 단어들을 알파벳 순서에 따라 정렬하게 합니다.
 # 따라서 람다 함수는 첫 번째 키는 "def ghi"나 "def jkl"과 같은 튜플을 반환하고, 두 번째 키는 "abc"와 같은 문자열을 반환합니다. 이를 sort() 함수의 key 인자로 전달하면, 이 함수는 로그 파일 리스트를 첫 번째 키로 먼저 정렬하고, 그 다음에 두 번째 키로 정렬합니다.
 # 결국 이 함수는 문자로 이루어진 로그는 두 번째 단어 이후의 단어들과 첫 번째 단어를 기준으로 정렬하고, 숫자로 이루어진 로그는 그대로 유지하는 기능을 수행합니다.
+~~~
+
+### Most Common Word(819) 4/22
+
+collections.counter()
+
+~~~python
+https://www.geeksforgeeks.org/counters-in-python-set-1/
+https://www.geeksforgeeks.org/counters-in-python-set-2-accessing-counters/
+
+# A Counter is a subclass of dict. Therefore it is an unordered collection where elements and their respective count are stored as a dictionary. 
+
+# Example of each type of counter initialization : 
+
+## A Python program to show different ways to create
+# Counter
+from collections import Counter
+
+# With sequence of items
+print(Counter(['B','B','A','B','C','A','B','B','A','C'])) # Counter({'B': 5, 'A': 3, 'C': 2})
+
+# with dictionary
+print(Counter({'A':3, 'B':5, 'C':2})) # Counter({'B': 5, 'A': 3, 'C': 2})
+
+# with keyword arguments
+print(Counter(A=3, B=5, C=2)) # Counter({'B': 5, 'A': 3, 'C': 2})
+~~~
+
+most_common()
+
+~~~python
+# Python example to demonstrate most_elements() on
+# Counter
+from collections import Counter
+
+coun = Counter(a=1, b=2, c=3, d=120, e=1, f=219)
+
+# This prints 3 most frequent characters
+for letter, count in coun.most_common(3):
+	print('%s: %d' % (letter, count))
+~~~
+
+most_common_word
+
+~~~python
+import re
+import collections
+
+class Solution:
+    def mostCommonWord(self, paragraph: str, banned: list[str]) -> str:
+        # input: phragraph, ""
+        # split(), lower(), re.sub(), not in banned, []
+        # collections.counter(), most_common()
+        # ouput: most frequent word, not banned ""
+        
+        my_word = [word for word in re.sub(r'[^\w]', ' ', paragraph).lower().split() if word not in banned] # ' '가 아닌 ''로 받으면 space가 전부 붙어버린다.
+        print(f"type of my_word is {type(my_word)}")
+        my_counter = collections.Counter(my_word)
+        print(f"\ntype of my_counter is {type(my_counter)}")
+        print(f"\nmy_counter.most_common(3) is {my_counter.most_common(3)})")
+        print(f"\nmy_counter.most_common(1)[0] is {my_counter.most_common(1)[0]})")
+        print(f"\ntype of my_counter.most_common(1)[0] {type(my_counter.most_common(1)[0])})")
+        return my_counter.most_common(1)[0][0].lower() # tuple이므로 key, value를 쓸 수 없고 index로 접근
+        
+sol = Solution()
+print(sol.mostCommonWord("Bob hit a ball, the hit BALL flew far after it was hit.",
+["hit"]))
+
+# type of my_word is <class 'list'>
+
+# type of my_counter is <class 'collections.Counter'>
+
+# my_counter.most_common(3) is [('ball', 2), ('bob', 1), ('a', 1)])
+
+# my_counter.most_common(1)[0] is ('ball', 2))
+
+# type of my_counter.most_common(1)[0] <class 'tuple'>)
+
+# ball
+~~~
+
+### Valid Anagram(242)
+
+~~~python
+# initial order does not matter
+# frequences does matter
+# there are only 26 letters 
+# https://www.geeksforgeeks.org/defaultdict-in-python/
+
+~~~
+
+### Group Anagrams(49)
+
+~~~python
 ~~~
 
