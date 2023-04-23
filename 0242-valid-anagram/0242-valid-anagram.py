@@ -2,13 +2,13 @@
 # 방법2: index 26
 # counter도 사용할 수 있지 않을까..?
 
-# # 방법1: sorted()/ 64%, 10%
+# # 방법1: sorted()/ 64% 10%/ 비추천
 # comment: sorting is last resort when coding an algorithm.
 # class Solution:
 #     def isAnagram(self, s: str, t: str) -> bool:
 #         return sorted(s) == sorted(t)
 
-# #방법2: index26, string.count()/ 99%, 58%
+# #방법2: index26, string.count()/ 99% 58%/ 추천
 # # count() method returns an integer that denotes number of times a substring occurs in a given string. 
 # # https://www.geeksforgeeks.org/python-string-count-method/
 # # It's practically O(1), however, we're using the built in str.count() method, which theoretically is O(n), and since we call it 26 times this solution is O(26*(n+m)). But, python built-in library methods are efficiently coded for speed ups and can generally be used for efficient solutions.
@@ -21,17 +21,17 @@
 #                 return False
 #         return True
 
-# 방법3: set(), count()/ 93%, 32%
-class Solution:
-    def isAnagram(self, s: str, t: str) -> bool:
-        if len(s) != len(t):
-            return False
-        for char in set(s):
-            if s.count(char) != t.count(char):
-                return False
-        return True
+# # 방법3: set(), count()/ 93% 32%
+# class Solution:
+#     def isAnagram(self, s: str, t: str) -> bool:
+#         if len(s) != len(t):
+#             return False
+#         for char in set(s):
+#             if s.count(char) != t.count(char):
+#                 return False
+#         return True
         
-# 방법4: hash-map, dict.items()
+# 방법4: hash-map, dict.items()/ 51% 58%/ 비추천
 class Solution:
     def isAnagram(self, s: str, t:str) -> bool:
         if len(s) != len(t):
