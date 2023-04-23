@@ -21,7 +21,7 @@
 #                 return False
 #         return True
 
-# 방법3: set(), count()
+# 방법3: set(), count()/ 93%, 32%
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         if len(s) != len(t):
@@ -31,7 +31,38 @@ class Solution:
                 return False
         return True
         
-# Follow up
+# 방법4: hash-map, dict.items()
+class Solution:
+    def isAnagram(self, s: str, t:str) -> bool:
+        if len(s) != len(t):
+            return False
+        hash_dict = dict() # it means, {}
+        for char in s:
+            if char in hash_dict:
+                hash_dict[char] += 1
+            else:
+                hash_dict[char] = 1
+        for char in t:
+            if char in hash_dict:
+                hash_dict[char] -= 1
+            else:
+                return False
+        for k,v in hash_dict.items():
+            if v != 0: # is not None과는 다르다. 이유는?
+                return False
+        return True
+                
+
+# # 방법5: collections.defaultdict()
+# 추후 공부 필요
+# class Solution:
+#     def isAnagram(self, s: str, t: str) -> bool:
+#         tracker = collections.defaultdict(int)
+#         for x in s: tracker[x] += 1
+#         for x in t: tracker[x] -= 1
+#         return all(x == 0 for x in tracker.values())
+
+            # Follow up
 
 # What if the inputs contain unicode characters? How would you adapt your solution to such case?
 
