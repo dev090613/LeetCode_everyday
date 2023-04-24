@@ -437,6 +437,104 @@ class Solution:
 # Use a hash table instead of a fixed size counter. Imagine allocating a large size array to fit the entire range of unicode characters, which could go up to more than 1 million. A hash table is a more generic solution and could adapt to any range of characters.
 ~~~
 
+Last Stone Weight(1046) 4/24
+
+~~~python
+
+~~~
+
+### Merge Two Sorted Lists(21) 4/24
+
+![image-20230424094533652](/Users/isntsoo/Library/Application Support/typora-user-images/image-20230424094533652.png)
+
+~~~python
+class Solution:
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        # 방법1: recursive approch/ O(n+m) O(n+m)/ 
+        # 전제: l1와 l2는 정렬된 list
+        # 점화식은 위의 사진과 같다. mergedList가 포인트.
+        
+        # corner case: l1와 l2 중 하나가 null 인 경우 나머지 list의 헤드를 반환하면 merge가 완성된다.
+        if list1 is None:
+            return list2
+        elif list2 is None:
+            return list1
+        # 점화식 구현: 비교대상 이후의 노드들은 이미 merged 되었다고 가정
+        elif list1.val > list2.val:
+            list2.next = self.mergeTwoLists(list1, list2.next)
+            return list2
+        else: 
+            list1.next = self.mergeTwoLists(list1.next, list2)
+            return list1
+~~~
+
+### Contains Duplicate(217) 4/24
+
+~~~python
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        # 방법1: set()과 list()의 크기 차이를 이용
+        if len(nums) != len(set(nums)):
+            return True
+        return False
+~~~
+
+Binary Search(704)
+
+~~~python
+# #방법1: for i in range(len(arr)) 69%, 96%
+# 이 조건에 충족하지 않는 것 같다(You must write an algorithm with O(log n) runtime complexity.)
+# class Solution:
+#     def search(self, nums: List[int], target: int) -> int:
+#         # ascending order로 정렬된 arr(nums)
+#         # nums 중에서 target을 찾고, 그것의 index를 반환하라
+#         for i in range(len(nums)):
+#             if nums[i] == target:
+#                 return i
+#         return -1
+
+# 방법2: binary search 94%, 96% O(log n) O(1)
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        # 전제: 오름차순 정렬된 arr nums
+        # left와 right는 arr의 양 끝 인덱스
+        left = 0
+        right = len(nums)-1
+        
+        while left <= right:
+            mid = (left+right)//2
+            if nums[mid] == target:
+                return mid
+            elif nums[mid] < target:
+                left = mid+1
+            else:
+                right = mid-1
+        return -1
+~~~
+
+4/24
+
+~~~python
+def maxSubArray(self, nums: List[int]) -> int:        
+	newNum = maxTotal = nums[0]        
+	
+	for i in range(1, len(nums)):
+		newNum = max(nums[i], nums[i] + newNum)
+		maxTotal = max(newNum, maxTotal)
+
+	return maxTotal	
+
+def maxSubArray(self, nums: List[int]) -> int:
+    maxTotal = temp = nums[0]
+    for item in nums[1:]:
+        temp = max(item, item + temp)
+        maxTotal = max(maxTotal, temp)
+
+    return maxTotal
+~~~
+
+
+
 ### Group Anagrams(49)
 
 ~~~python
