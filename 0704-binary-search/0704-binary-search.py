@@ -1,4 +1,5 @@
 # #방법1: for i in range(len(arr)) 69%, 96%
+# 이 조건에 충족하지 않는 것 같다(You must write an algorithm with O(log n) runtime complexity.)
 # class Solution:
 #     def search(self, nums: List[int], target: int) -> int:
 #         # ascending order로 정렬된 arr(nums)
@@ -8,7 +9,7 @@
 #                 return i
 #         return -1
 
-# 방법2: binary search
+# 방법2: binary search 10%, 56% O(log n) O(1)
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
         # 전제: 오름차순 정렬된 arr nums
@@ -25,14 +26,3 @@ class Solution:
             else:
                 right = mid-1
         return -1
-        
-#         while left<=right:
-#             mid = (left+right)//2
-#             if nums[mid]==target:
-#                 return mid
-#             elif nums[mid]>target:
-#                 right = mid-1
-#             else:
-#                 left = mid+1
-        
-#         return -1
