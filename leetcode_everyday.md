@@ -565,9 +565,11 @@ class Solution:
 
 Squares of a Sorted Array(977) 4/25
 
+Remove Linked List Elements(203) 4/26
+
 ### Group Anagrams(49)
 
 ~~~python
-MG220818a
+
 ~~~
 
