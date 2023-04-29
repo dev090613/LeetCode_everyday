@@ -1,4 +1,17 @@
-### add two integer
+문제 해결방법
+
+~~~html
+1. Understand the Problem(문제를 이해한다)
+   1) 문제를 나만의 방식으로 바꾼다.
+   2) 인풋과 아웃풋 파악한다.
+   3. 중요한 데이터는 무엇인가
+2. Explore Concrete Examples - 간단한 예, 구체적인 예, Edge case(empty, invalid)
+3. Break it Down - step by step로 나누어본다.
+4. Solve/Simplify - 단순화 시켜서 풀어본다.
+5. Look Back and Refactor - 다시 보기, 다른 접근 방식, 한 눈에 이해, 일반화, 다른 사람
+~~~
+
+### add two integer(1)
 
 ~~~python
 # Given two integers num1 and num2, return the sum of the two integers.
@@ -12,26 +25,23 @@ class Solution:
 ### Middle of the Linked List(876) 4/15
 
 ~~~python
-# 해결 방법: Two pointer
-# 슬로우와 패스트 두 개의 포인터를 준비한다. fast는 말단, slow는 중간의 값을 반환할 것이기 때문에 둘은 2배수의 관계가 된다. 이것이 성립하기 위해서 slow가 1칸 이동할 때 fast는 2칸 이동할 것이다. 
-# fast, slow
-# 1      1(head)
+# slingly_linked_list의 중간 node를 반환하라
+		# Input: head = [1,2,3,4,5] => Output: [3,4,5]
+  	# Input: head = [1,2,3,4,5,6] => Output: [4,5,6]
+# 해결 방법: slow and fast pointer/ O(N), O(1)
+# 해설: 슬로우와 패스트 두 개의 포인터를 준비한다. fast는 말단, slow는 중간의 값을 반환할 것이기 때문에 둘은 2배수의 관계가 된다. 이것이 성립하기 위해서 slow가 1칸 이동할 때 fast는 2칸 이동할 것이다.
+# slow,  fast
+# 1      1(head)// 2
 # 2      3
-# 3      5
+# 3      5// 6(fast.next)인 경우에도 반환값이 3임
 # 4      7
 # 5      9
 class Solution:
     def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
         slow, fast = head, head
-        while fast and fast.next: # fast가 1칸 이동한 경우는 어차피 필요가 없으니
-            fast = fast.next.next
+        while fast and fast.next: # fast가 1칸 이동한 경우(fast.next)에도 fast인 경우와 반환값 같음            
+          	fast = fast.next.next
             slow = slow.next
-        # while fast:
-        #     fast = fast.next
-        #     if fast:
-        #         fast = fast.next
-        #     else: break
-        #     slow = slow.next
         return slow
 ~~~
 
