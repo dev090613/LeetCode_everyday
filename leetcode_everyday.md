@@ -573,7 +573,42 @@ class Solution:
                 return [i, hashmap[complement]]
 ~~~
 
-Squares of a Sorted Array(977) 4/25
+Squares of a Sorted Array(977) 4/30
+
+~~~python
+# 오름차순의 배열을 입력 받는다. 그것의 각 아이템에 대한 제곱의 배열을 오름차순으로 반환한다.
+# Input: nums = [-4,-1,0,3,10] Output: [0,1,9,16,100]
+# Input: nums = [-7,-3,2,3,11] Output: [4,9,9,49,121]
+
+# 방법1: sorted()/ O(NlogN) O(N)/ 80% 12%
+class Solution:
+    def sortedSquares(self, nums: List[int]) -> List[int]:
+        return sorted(num*num for num in nums)
+        
+# 방법2: Two pointer/ O(N) O(N)/ 52% 6%
+class Solution:
+    def sortedSquares(self, nums: List[int]) -> List[int]:
+        # 제곱값을 넣을 empty list를 생성한다.
+        n = len(nums)
+        empty_list = [0] * n # 또는 list(range(n))
+        # 양 끝에 two pointer를 배치
+        left, right = 0, n-1
+        for i in range(n-1, 0-1, -1):# exclusive
+            # 양 포인터의 절대값을 비교
+            if abs(nums[left]) < abs(nums[right]): # 우 포인터의 값이 큰 경우
+                value = nums[right]
+                right -= 1
+            else:
+                value = nums[left]
+                left += 1
+            # 제곱값을 empty list에 저장
+            empty_list[i] = value * value
+        return empty_list
+      
+# 문자열처리를 하여서 음수를 양수로 바꾼 다음에 솔팅하는 방법은?
+~~~
+
+
 
 Remove Linked List Elements(203) 4/26
 
@@ -583,3 +618,6 @@ Remove Linked List Elements(203) 4/26
 
 ~~~
 
+
+
+~~~
