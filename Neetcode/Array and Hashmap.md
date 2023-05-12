@@ -150,8 +150,15 @@ class Solution:
 ##### Valid Palindrome(125)
 
 ~~~python
-# pythonic
-
+# isalnum()
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        s = s.lower()
+        new_s = ""
+        for c in s:
+            if c.isalnum():
+                new_s += c
+        return new_s == new_s[::-1]
 ~~~
 
 ~~~python
@@ -161,13 +168,6 @@ class Solution:
 # idea: Two pointer
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        # 1. Two pointer를 설정
-        # 2. alphanum 인지 확인한다.
-            # 아닌 경우 이동한다
-            # 맞는 경우 두 값을 비교한다
-                # 같다면 이동한다
-                # 다르다면 False
-        # 2번으로 돌아간다.
         left, right = 0, len(s)-1
         while left < right:
             while (not self.alphaNum(s[left])) and (left < right):
@@ -180,15 +180,13 @@ class Solution:
         return True
     
     def alphaNum(self, c):
-        return (ord('a') < ord(c) < ord('z') or
-                ord('A') < ord(c) < ord('Z') or
-                ord('0') < ord(c) < ord('9'))
+        return (ord('a') <= ord(c) <= ord('z') or
+                ord('A') <= ord(c) <= ord('Z') or
+                ord('0') <= ord(c) <= ord('9'))
 ~~~
 
-
-
 ~~~python
-# # 방법2: isalnum() 이 아닌 re.sub 사용
+# re.sub
 # class Solution:
 #     def isPalindrome(self, s: str) -> bool:
 #         s = s.lower()
