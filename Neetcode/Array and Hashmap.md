@@ -4,9 +4,9 @@
 
 ---
 
-~~~python
-# 217. Contains Duplicate
+Contains Duplicate(217)
 
+~~~python
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
         ## 주어진 List[int]에서 동일한 수가 두 번 반복되는지
@@ -24,9 +24,9 @@ class Solution:
         return False
 ~~~
 
-~~~python
-# 242. Valid Anagram
+Valid Anagram(242)
 
+~~~python
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         # 문자열 s와 문자열 t가 Anagram인지
@@ -59,9 +59,9 @@ class Solution:
         # return sorted(s) == sorted(t)        
 ~~~
 
-~~~python
-# 1. Two Sum
+##### Two Sum(1)
 
+~~~python
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         # 방법1: Brute force O(n^2) O(1)
@@ -83,6 +83,8 @@ class Solution:
             hashmap[n] = i
         # return # 항상 하나의 sol이 존재하므로 반환값 필요 없음 위에서 다 반환될 것
 ~~~
+
+##### Group Anagrams(49)
 
 ~~~python
 # 49. Group Anagrams
@@ -117,5 +119,82 @@ class Solution:
         for str in strs:
             res[tuple(sorted(str))].append(str) 
         return list(res.values())
+~~~
+
+##### Longest Consecutive Sequence(128)
+
+~~~python
+# 128. Longest Consecutive Sequence
+# input: [100,4,200,1,3,2] output: 4
+# Idea: Consecutive Sequnce의 시작점은 -1의 값을 가지고 있지 않다.
+# Time: O(n), Space: O(n)
+
+
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        num_set = set(nums) # 이유: To allow O(1) lookups
+        # 반환할 값인 가장 긴 길이
+        longest = 0
+        
+        # nums에서 가장 긴 단편을 찾을 것이다.
+        for num in nums: # O(n)
+            # 단편의 시작점을 찾는다.
+            if (num - 1) not in num_set:
+                length = 0 # 1로 두어도 무방
+                while (num + length) in num_set:
+                    length += 1
+                longest = max(length, longest) # scope 주의하기
+        return longest
+~~~
+
+##### Valid Palindrome(125)
+
+~~~python
+# pythonic
+
+~~~
+
+~~~python
+# 학습용 솔루션: Space O(1)로 풀어보기, isalnum 사용하지 않기 
+# 조건: after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters
+# input: "A man, a plan, a canal: Panama", output: True
+# idea: Two pointer
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        # 1. Two pointer를 설정
+        # 2. alphanum 인지 확인한다.
+            # 아닌 경우 이동한다
+            # 맞는 경우 두 값을 비교한다
+                # 같다면 이동한다
+                # 다르다면 False
+        # 2번으로 돌아간다.
+        left, right = 0, len(s)-1
+        while left < right:
+            while (not self.alphaNum(s[left])) and (left < right):
+                left += 1
+            while (not self.alphaNum(s[right])) and (left < right):
+                right -= 1
+            if s[left].lower() != s[right].lower():
+                return False
+            left, right = left+1, right-1
+        return True
+    
+    def alphaNum(self, c):
+        return (ord('a') < ord(c) < ord('z') or
+                ord('A') < ord(c) < ord('Z') or
+                ord('0') < ord(c) < ord('9'))
+~~~
+
+
+
+~~~python
+# # 방법2: isalnum() 이 아닌 re.sub 사용
+# class Solution:
+#     def isPalindrome(self, s: str) -> bool:
+#         s = s.lower()
+#         s = re.sub('[^a-z0-9]', '', s)
+        
+#         return s == s[::-1]
+#----------------------------------------------------------
 ~~~
 
