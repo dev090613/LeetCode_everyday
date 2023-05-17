@@ -1,6 +1,7 @@
-# 중복되는 값이 있는 경우 True
-# [1,2,3,1]
-# True
+# 동일한 값이 두 번 반복되는 경우 True 반환
+# brute forst O(n^2)
+# hash map O(n)
+# len(set)
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
         hashset = set()
@@ -9,10 +10,3 @@ class Solution:
                 return True
             hashset.add(num)
         return False
-
-# class Solution:
-#     def containsDuplicate(self, nums: List[int]) -> bool:
-#         # # 방법1: set()과 list()의 크기 차이를 이용/ 61% 77%
-#         # if len(nums) != len(set(nums)):
-#         #     return True
-#         # return False
