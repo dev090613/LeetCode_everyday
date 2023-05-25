@@ -17,7 +17,7 @@ class Solution:
         
         while l < r: # Scaning with Two pointer
             cus_sum = numbers[l] + numbers[r]
-            # print("cus_sum is {cus_sum}")
+            print("cus_sum is {cus_sum}")
             
             if cus_sum > target:
                 r -= 1
