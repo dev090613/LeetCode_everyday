@@ -1,15 +1,22 @@
-# recursive solution
-
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        # break point
-        if (not head) or (not head.next):
-            return head
-        
-        result = self.reverseList(head.next)
-        head.next.next = head
-        head.next = None
-        return result
-    
-# time complexity: O(n)
-# space complexity: O(n)
+        """
+        None head -> head.next -> ... -> None
+        임의의 위치(curr)에서 시작
+        3 pointer: prev, curr, next_node
+        """
+        def reverse(curr, prev):
+            # Empty list
+            if not curr: 
+                return prev
+            
+            next_node = curr.next
+            curr.next = prev
+            return reverse(next_node, curr)
+                
+        return reverse(head, None)
