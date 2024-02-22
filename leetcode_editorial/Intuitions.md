@@ -4,21 +4,54 @@
 
 #### 문제
 
-주어진 integer n에 대하여, n이 2의 거듭제곱인지 Boolean을 판단하라
+주어진 integer n에 대하여, n이 2의 거듭제곱인지 판단하라 -> bool
 
 <u>follow-up: loop와 recursion을 사용하지 않고 판단할 수 있는가</u>
 
-#### Intuition - Bitwise
+#### Intuition
 
-- 
+![image-20240222181327224](images/image-20240222181327224.png)
+
+- 2의 거듭제곱인 integer를 binary로 표현하려면 오직 1-bit만이 필요하다.
+  - Power of two has just one 1-bit.
+
+![image-20240222180943182](images/image-20240222180943182.png)
+
+- `x & (x - 1)` is a way to set the rightmost 1-bit to zero.
 
  ~~~python
- 
+ class Solution:
+     def isPowerOfTwo(self, n: int) -> bool:
+         return n > 0 and n & (n - 1) == 0
  ~~~
+
+Intuition - II
+
+- 2의 보수(Two’s complement)
+
+![image-20240222181506329](images/image-20240222181506329.png)
+
+![image-20240222182338701](images/image-20240222182338701.png)
+
+- to compute `−x` one has to revert all bits in `x` and then add 1 to the result.
+- `x & (-x)` would keep that rightmost 1-bit and set all the other bits to 0.
+
+![image-20240222182512511](images/image-20240222182512511.png)
+
+- `-x`: for the power of two, it would result in `x` itself, since a power of two contains just one 1-bit
+- Other numbers have more than 1-bit in their binary representation and hence for them `x & (-x)` would not be equal to `x` itself
+
+~~~python
+class Solution:
+    def isPowerOfTwo(self, n: int) -> bool:
+        return n > 0 and n & (-n) == n
+~~~
+
+
 
 #### Complexity
 
-
+- 
 
 > 컴퓨터에서의 수표현
 >
