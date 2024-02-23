@@ -1,5 +1,7 @@
 ## 2.19(월) 231.  Power of Two
 
+- 2의 거듭제곱인 integer를 binary로 표현하려면 오직 1-bit만이 필요하다.
+- to compute `−x` one has to revert all bits in `x` and then add 1 to the result. for the power of two, it would result in `x` itself, since a power of two contains just one 1-bit
 - 거듭제곱을 비트로 표현하였을 때의 규칙성을 배울 수 있다. 관련된 개념으로, integer 최대값 및 최소값, 그리고 오버플로우에 대해서 생각해볼 수 있다.
 
 #### 문제
@@ -47,11 +49,15 @@ class Solution:
         return n > 0 and n & (-n) == n
 ~~~
 
+#### Complexity: O(1)
 
-
-#### Complexity
-
-- 
+> 더 알아보기
+>
+> 비트연산이 Time, Space O(1)인 이유?
+>
+> https://stackoverflow.com/questions/36830801/can-i-assume-that-a-bitwise-and-operation-is-o1-if-so-why
+>
+> Overflow는 왜 발생하는가?
 
 > 컴퓨터에서의 수표현
 >
@@ -111,3 +117,39 @@ class Solution:
 
 - Time: `O(n)`, input array를 scan한다.
 - Space: `O(1)`, Output 이외의 공간은 별도로 할당하지 않는다.
+
+## 2월 22일(목) Find the town judge
+
+
+
+## 2월 23일(금) Cheapest Flights Within K Steps
+
+### 문제
+
+Variables: `n`, `src`, `dst`, `k`, `flights`
+
+`n`개의 cities가 주어졌을 때, `src`에서 `dst`로 `flights`를 타고 이동하려 한다. `flights` 는 `flight[i] = [from_i. to_i, price_i]`로 이루어진  Array이다. `k` steps 이내에 Most Cheapest Way로 이동한다면 얼마인가?
+
+#### Intuition
+
+- a) 각각의 city는 node, b) cities 간의 connection은 edge, c) cost는 weight 를 의미하는 Weighted Graph 문제이다. 통상적으로 Weighted Graph 는 Dijkstra 또는 Bellmann ford algorithm으로 해결하며 Unweighted Graph 는 BFS 로 해결한다.
+  - For a weighted graph, a path having more edges does not necessarily mean the path is more expensive.
+
+- Bellman Ford's algorithm is used to find the shortest paths from the source node to all other vertices in a weighted graph. It depends on the idea that the shortest path contains at most `N - 1` edges.
+
+#### Bellman Ford Algorithm
+
+1. The shortest path contains at most `N - 1` edges. because the shortest path cannot have a cycle.
+2. It takes as input a directed weighted graph and a starting node
+3. It produces all the shortest paths from the starting node to all other vertices.
+4. It initially sets the distance from the starting node to all other vertices to infinity. The distance of the starting node is set to `0`
+5. Relaxing an Edge: The algorithm loops through each edge `N - 1` times. If it finds an edge through which the distance of a node is smaller than the previously stored value, it uses this edge and stores the new value.
+
+Restraction
+
+- Since we are limited to `k` stops, we can modify this algorithm to restrict the maximum number of edges that can be in a path to `k + 1`.
+
+> [Dijkstra’s algorithm](https://www.baeldung.com/cs/dijkstra) is a very famous method to find the shortest path since it requires very few resources. It works on every directed graph that doesn’t have [negative edge valuations](https://www.baeldung.com/cs/dijkstra-negative-weights).
+>
+> - Dijkstra’s and [Bellmann Ford’s](https://www.baeldung.com/cs/bellman-ford) algorithm use a technique called edge relaxation. This means that during traversing our graph and finding our shortest path, we update the paths we have for already known nodes as soon as we find a shorter path to reach it
+> - Dijkstra’s algorithm has a time complexity of `O(V^2)` when it is implemented with a list, compared to Bellmann Ford’s algorithm with `O(VE)`, which also uses the method of relaxing edges.
