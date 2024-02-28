@@ -153,3 +153,46 @@ Restraction
 >
 > - Dijkstra’s and [Bellmann Ford’s](https://www.baeldung.com/cs/bellman-ford) algorithm use a technique called edge relaxation. This means that during traversing our graph and finding our shortest path, we update the paths we have for already known nodes as soon as we find a shorter path to reach it
 > - Dijkstra’s algorithm has a time complexity of `O(V^2)` when it is implemented with a list, compared to Bellmann Ford’s algorithm with `O(VE)`, which also uses the method of relaxing edges.
+
+
+
+## 2.27 1245 Tree Diameter
+
+
+
+## 2.28 - 124. Binary Tree maximum path sum
+
+### intuition
+
+- heights를 이용하여 diameter를 구하는 방법은 즉각적으로 떠오르지만, root를 포함하지않는 경우의 max_path_sum은 떠오르지 않았다.
+- dfs 를 통해 tree의 모든 노드를 거치며 diameter의 최대값을 찾는다면 그것이 max_path_sum이 될 것이다.
+- `self.max_path_sum = max(self.max_path_sum, rootval + max_right_sum + max_left_sum) `
+  - dfs function은 diameter를 구하기 위해 height를 반환한다.
+
+### Fault
+
+- 각각의 path_sum은 음수인 경우보다 0인 경우가 최대값에 해당하므로 `max_right_sum = max(max_right_sum, 0)`을 고려해주어야 한다.
+- dfs function 작성시 node와 root를 섞어서 작성하였다.
+
+
+
+## 2.28 - 128. Longest Consecutive Sequence
+
+### 문제
+
+- 일련의 integer numbers가 있을 때, 연속성을 유지하는 가장 긴 길이를 반환해야 한다.
+
+- 자주 틀리는 문제이다. 더 효율적인 방법이 있지만 sort 기법을 이용해서 풀 것이다.
+
+### Intuition
+
+- 연속적이다: 
+  1. 정렬한 후 이전 인덱스의 element와 다르다. `nums[i - 1] != nums[i]`
+  2. 그리고 Substraction of two elements is One.  `nums[i] - nums[i - 1] = 1`
+     1. 그렇다면 길이가 증가한다
+     2. 그렇지 않다면 연속되는 sequence의 시작점이다.
+
+### Fault
+
+- 불필요하게 Set을 사용했다. `O(n)` Time solution에서는 필요한 DS이다.
+- `nums[i - 1]`과 `nums[i] - 1`을 잘못 사용했다.
