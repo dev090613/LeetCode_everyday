@@ -237,4 +237,37 @@ Intuition
 
 - 처음에는 dfs로 접근하였으나 3sum과 유사한 문제이다.
 - 삼각형의 특정(`a + b > c`)을 활용하기 위해서 정렬을 한다. 그리고 가장 큰 값을 기준으로 이중 loop를 구성한다.
-  - `a + b > c`를 만족하는 경우 `a`와 `b` 사이에 있는 `a'`에 대하여  `a' + b > c` 가 성립하므로 `output` 에 1 이 아닌 `b - a` 에 해당하는 모든 elements를 더한다.
+  - `a + b > c`를 만족하는 경우 `a`와 `b` 사이에 있는 `a'`에 대하여  `a' + b > c` 가 성립하므로 `output` 에 1 이 아닌 `b - a` 에 해당하는 모든 elements를 더한다.****
+
+
+
+## 3.17 Sun - 525. Contiguous Array
+
+### 문제
+
+binary array가 주어졌다. contiguous subarray with an equal number of `0`, `1` 의 최대 길이를 구하라.
+
+### Intuition
+
+- `0`, `1`의 개수를 count한다. 
+  - 만약 그들의 개수가 같은 경우 **<u>최대 길이</u>**는 두 수의 합이다.
+  - 만약 어느 하나의 개수가 더 많다면 그 diff 값과 인덱스(1)를 매핑한다. 그리고 그 이후에 동일한 diff값이 나온다면 이번 인덱스(2)와 이전 인덱스(1)의 차이가 contiguous subarray의 길이가 된다.
+
+### Time and Space complexity
+
+: O(n), loop를 한 번 돌며 hashMap을 사용한다.
+
+
+
+## 3.18 Mon - 2485. Find the Pivot Integer
+
+<img src="images/image-20240318091240398.png" alt="image-20240318091240398" style="zoom:50%;" />
+
+### Intuition
+
+- pivot index를 기준으로, 왼쪽과 오른쪽의 총 합이 같다. 물론 인덱스 값을 양측에 포함해도 총 합은 같다.
+- right most value 포인터인 경우  `left = total sum`,  `right = right most value`  이다. `left == right`인 지점의 포인터가 pivot이다.
+
+Time and Space
+
+- O(n), O(1). 한 번의 loop를 돌며 포인터를 사용하여 별도 공간을 할당하지 않는다.
