@@ -44,8 +44,10 @@ Intuition
 
 Intuition
 
-- O(n) Time, O(1) Space의 제약사항을 지키는 부분이 어렵다
+- O(n) Time, O(1) Space의 제약사항을 지키는 것이 어렵다.
 
-- 수학적으로, return value는 [1..len(nums)] 중 하나이며 최악의 경우 len(nums) + 1이다
+- 수학적으로, return value는 [1..len(nums)] 중 하나이며 최악의 경우 len(nums) + 1이다. nums array를  최대한 smallest positive integer로 구성하면 [1..len(nums)] 이기 때문이다.
 - 이전에 풀었던 문제와 마찬가지로 input array를 조작하여 별도의 Space를 마련하지 않을 수 있다.
-- value - 1을 index로 사용하고, 음수로 마킹한다.
+- nums array의 elements를 살펴보자.  value - 1을 index로 사용하고, 음수로 마킹한다. 두 번째 루프를 돌았을 때 음수가 아닌 위치의 인덱스를 가지고 smallest positive integer를 찾을 수 있다. value가 1 미만인 경우와 len(nums)를 초과하는 경우에는 skip한다. 이때 0의 경우에는 음수 마킹이 불가능하며, 
+- 
+- 
